@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-OpenRA 全载具建造程序
-生产所有载具单位：基地车、采矿车、装甲运输车、防空车、吉普车、运输卡车、地雷部署车
+OpenRA 全空军建造程序
+生产所有空中单位：运输直升机、雌鹿直升机、黑鹰直升机、长弓武装直升机、雅克战机、米格战机
 """
 
 import sys
@@ -21,24 +21,20 @@ from OpenRA_Copilot_Library.models import TargetsQueryParam
 def print_header():
     """打印程序头部信息"""
     print("=" * 70)
-    print("OpenRA 全载具建造程序")
+    print("OpenRA 全空军建造程序")
     print("=" * 70)
-    print("\n目标载具:")
-    print("  • 基地车 (mcv)")
-    print("  • 采矿车 (harv)")
-    print("  • 装甲运输车 (apc)")
-    print("  • 防空车 (ftrk)")
-    print("  • 吉普车 (jeep)")
-    print("  • 运输卡车 (truk)")
-    print("  • 地雷部署车 (mvly)")
-    print("\n建筑需求:")
-    print("  ✓ 建造厂 (基础)")
-    print("  ✓ 电厂 x4 (提供电力)")
-    print("  ✓ 矿场 (解锁车间)")
-    print("  ✓ 战车工厂 (生产载具)")
+    print("\n目标空中单位:")
+    print("  • 运输直升机 (tran) - 运输部队")
+    print("  • 雌鹿直升机 (hind) - 苏军武装直升机")
+    print("  • 黑鹰直升机 (mh60) - 盟军武装直升机")
+    print("  • 长弓武装直升机 (heli) - 高级武装直升机")
+    print("  • 雅克战机 (yak) - 苏军攻击机")
+    print("  • 米格战机 (mig) - 苏军战斗机")
+    print("\n建筑依赖关系:")
+    print("  建造厂 → 电厂 x4 → 矿场 → 雷达站 → 空军基地")
     print("\n游戏设置要求:")
     print("  • Skirmish 自由模式")
-    print("  • 起始资金: $15000+ (建议$30000)")
+    print("  • 起始资金: $25000+ (建议$40000)")
     print("  • 科技等级: Unrestricted")
     print("  • AI: None")
     print("=" * 70)
@@ -66,8 +62,10 @@ def wait_for_building(api: GameAPI, building_name: str, timeout: int = 120, chec
         
         # 查询建筑（支持多种名称）
         possible_names = [building_name]
-        if building_name == "车间":
-            possible_names.append("战车工厂")
+        if building_name == "雷达":
+            possible_names.append("雷达站")
+        elif building_name == "机场":
+            possible_names.extend(["空军基地", "afld"])
         
         buildings = api.query_actor(TargetsQueryParam(
             type=possible_names,
@@ -102,36 +100,36 @@ def check_can_produce(api: GameAPI, unit_code: str) -> tuple:
     except Exception as e:
         return (False, f"检查失败: {e}")
 
-def produce_vehicle(api: GameAPI, vehicle_name: str, vehicle_code: str, quantity: int) -> int:
+def produce_aircraft(api: GameAPI, aircraft_name: str, aircraft_code: str, quantity: int) -> int:
     """
-    生产指定数量的载具
+    生产指定数量的飞机
     
     Args:
         api: GameAPI实例
-        vehicle_name: 载具中文名称
-        vehicle_code: 载具代码
+        aircraft_name: 飞机中文名称
+        aircraft_code: 飞机代码
         quantity: 生产数量
     
     Returns:
         int: 成功生产的数量
     """
-    print(f"\n--- {vehicle_name} (代码: {vehicle_code}, 目标: x{quantity}) ---")
+    print(f"\n--- {aircraft_name} (代码: {aircraft_code}, 目标: x{quantity}) ---")
     
     # 检查是否可以生产
-    can_produce, reason = check_can_produce(api, vehicle_code)
+    can_produce, reason = check_can_produce(api, aircraft_code)
     print(f"   可生产: {can_produce} ({reason})")
     
     if not can_produce:
-        print(f"   [跳过] {vehicle_name} - {reason}")
-        print(f"   提示: 可能受科技等级限制或缺少前置建筑")
+        print(f"   [跳过] {aircraft_name} - {reason}")
+        print(f"   提示: 检查是否有机场和科技等级")
         return 0
     
     success_count = 0
     for i in range(quantity):
         try:
-            wait_id = api.produce(vehicle_code, 1, False)
+            wait_id = api.produce(aircraft_code, 1, False)
             if wait_id:
-                api.wait(wait_id, 60)  # 载具生产时间较长
+                api.wait(wait_id, 60)  # 飞机生产时间
                 print(f"   [{i+1}/{quantity}] ✓ 完成")
                 success_count += 1
             else:
@@ -150,7 +148,7 @@ def main():
     input("按回车开始...\n")
     
     print("=" * 70)
-    print("[*] OpenRA 全载具建造程序 - 开始执行")
+    print("[*] OpenRA 全空军建造程序 - 开始执行")
     print("=" * 70)
     
     # 连接API
@@ -162,8 +160,8 @@ def main():
     print(f"   资金: ${info.Cash}")
     print(f"   电力: {info.Power} / {info.PowerProvided}")
     
-    if info.Cash < 10000:
-        print("\n   [警告] 资金不足！建议至少$15000")
+    if info.Cash < 20000:
+        print("\n   [警告] 资金不足！建议至少$25000")
         response = input("   继续？(y/n): ")
         if response.lower() != 'y':
             return
@@ -230,23 +228,44 @@ def main():
     
     time.sleep(3)
     
-    # 步骤5: 建造战车工厂
-    print("\n[步骤5] 建造战车工厂...")
-    existing_weap = api.query_actor(TargetsQueryParam(type=['战车工厂', '车间'], faction='自己'))
-    if existing_weap and len(existing_weap) > 0:
-        print("   ✓ 战车工厂已存在")
+    # 步骤5: 建造雷达站（空军基地的前置建筑）
+    print("\n[步骤5] 建造雷达站...")
+    existing_radar = api.query_actor(TargetsQueryParam(type=['雷达', '雷达站'], faction='自己'))
+    if existing_radar and len(existing_radar) > 0:
+        print("   ✓ 雷达站已存在")
     else:
         try:
-            api.produce("战车工厂", 1, True)
-            print("   [下单] 战车工厂")
-            wait_for_building(api, "车间", timeout=120)
+            api.produce("雷达", 1, True)
+            print("   [下单] 雷达站")
+            wait_for_building(api, "雷达", timeout=120)
+        except Exception as e:
+            print(f"   [错误] {e}")
+    
+    time.sleep(3)
+    
+    # 步骤6: 建造空军基地（机场）
+    print("\n[步骤6] 建造空军基地（机场）...")
+    existing_airfield = api.query_actor(TargetsQueryParam(type=['机场', '空军基地', 'afld'], faction='自己'))
+    if existing_airfield and len(existing_airfield) > 0:
+        print("   ✓ 机场已存在")
+    else:
+        try:
+            api.produce("机场", 1, True)
+            print("   [下单] 空军基地")
+            success = wait_for_building(api, "机场", timeout=150)
+            if not success:
+                print("   [错误] 机场未完成，无法生产飞机！")
+                print("   请检查是否有足够空间放置机场")
+                response = input("   是否继续？(y/n): ")
+                if response.lower() != 'y':
+                    return
         except Exception as e:
             print(f"   [错误] {e}")
     
     time.sleep(5)
     
-    # 步骤6: 检查建筑状态
-    print("\n[步骤6] 检查建筑状态...")
+    # 步骤7: 检查建筑状态
+    print("\n[步骤7] 检查建筑状态...")
     info = api.player_base_info_query()
     print(f"   当前电力: {info.Power} / {info.PowerProvided}")
     print(f"   剩余资金: ${info.Cash}")
@@ -254,30 +273,35 @@ def main():
     all_buildings = api.query_actor(TargetsQueryParam(faction='自己'))
     building_types = set()
     for building in all_buildings:
-        if building.type in ['建造厂', '电厂', '矿场', '战车工厂', '车间']:
+        if building.type in ['建造厂', '电厂', '矿场', '雷达', '雷达站', '机场', '空军基地', 'afld']:
             building_types.add(building.type)
     
     print(f"   已建成建筑: {', '.join(sorted(building_types))}")
     
-    has_weap = '战车工厂' in building_types or '车间' in building_types
-    if not has_weap:
-        print("\n   [错误] 缺少战车工厂！无法生产载具")
-        print("   请检查建筑是否建造完成")
+    # 检查关键建筑
+    has_radar = '雷达' in building_types or '雷达站' in building_types
+    has_airfield = '机场' in building_types or '空军基地' in building_types or 'afld' in building_types
+    
+    print("\n   建筑系统状态:")
+    print(f"     雷达站: {'✓' if has_radar else '✗'}")
+    print(f"     机场: {'✓' if has_airfield else '✗'}")
+    
+    if not has_airfield:
+        print("\n   [错误] 缺少机场！无法生产飞机")
+        print("   请检查机场是否建造成功")
         return
     
-    print("   ✓ 建筑系统准备就绪")
-    
-    # 步骤6.5: 诊断科技等级限制
-    print("\n[步骤6.5] 诊断科技等级...")
-    vehicle_test_list = [
-        ("防空车", "ftrk"),  # 基础载具
-        ("采矿车", "harv"),  # 基础载具
-        ("吉普车", "jeep"),  # 可能需要高科技
-        ("装甲运输车", "apc"),  # 可能需要高科技
+    # 步骤7.5: 诊断科技等级限制
+    print("\n[步骤7.5] 诊断科技等级...")
+    aircraft_test_list = [
+        ("雅克战机", "yak"),          # 基础战机
+        ("米格战机", "mig"),          # 基础战机
+        ("运输直升机", "tran"),       # 运输机
+        ("雌鹿直升机", "hind"),       # 武装直升机
     ]
     
     available_count = 0
-    for name, code in vehicle_test_list:
+    for name, code in aircraft_test_list:
         can_produce, _ = check_can_produce(api, code)
         if can_produce:
             available_count += 1
@@ -287,57 +311,56 @@ def main():
     
     if available_count < 2:
         print("\n   [警告] 检测到科技等级限制！")
-        print("   大部分载具无法生产")
+        print("   大部分飞机无法生产")
         print("\n   解决方案:")
         print("   1. 按 ESC → Abandon Game")
         print("   2. 回到主菜单")
         print("   3. 选择: Singleplayer → Skirmish")
         print("   4. 在游戏设置中找到 'Tech Level' 选项")
         print("   5. 将其改为 'Unrestricted' (无限制)")
-        print("   6. Starting Cash 建议设置为 $30000")
+        print("   6. Starting Cash 建议设置为 $40000")
         print("   7. 开始游戏后重新运行此脚本")
-        print("\n   是否继续尝试生产可用载具？")
+        print("\n   是否继续尝试生产可用飞机？")
         response = input("   (y=继续/n=退出): ")
         if response.lower() != 'y':
             return
     else:
         print(f"\n   ✓ 科技等级检查通过 ({available_count}/4 可生产)")
     
-    # 步骤7: 生产所有载具
+    # 步骤8: 生产所有飞机
     print("\n" + "=" * 70)
-    print("[步骤7] 开始生产所有载具")
+    print("[步骤8] 开始生产所有空中单位")
     print("=" * 70)
     
-    # 定义所有载具类型 (名称, 代码, 数量, 优先级)
-    # 优先级: 1=基础载具(通常可用), 2=中级载具, 3=高级载具
-    vehicle_list = [
-        ("采矿车", "harv", 2, 1),       # 基础经济单位
-        ("防空车", "ftrk", 2, 5),        # 基础防空单位
-        ("吉普车", "jeep", 2, 2),        # 侦查单位
-        ("装甲运输车", "apc", 2, 2),     # 运输步兵
-        ("运输卡车", "truk", 1, 2),      # 运输物资
-        ("地雷部署车", "mvly", 1, 3),    # 部署地雷
-        ("基地车", "mcv", 1, 3),         # 额外基地车
+    # 定义所有飞机类型 (名称, 代码, 数量, 优先级)
+    # 优先级: 1=基础飞机, 2=高级飞机
+    aircraft_list = [
+        ("雅克战机", "yak", 3, 1),              # 苏军攻击机
+        ("米格战机", "mig", 2, 1),              # 苏军战斗机
+        ("运输直升机", "tran", 2, 1),           # 运输直升机
+        ("雌鹿直升机", "hind", 2, 2),           # 苏军武装直升机
+        ("黑鹰直升机", "mh60", 2, 2),           # 盟军武装直升机
+        ("长弓武装直升机", "heli", 2, 2),       # 高级武装直升机
     ]
     
-    # 按优先级排序（先生产基础载具）
-    vehicle_list.sort(key=lambda x: x[3])
+    # 按优先级排序（先生产基础飞机）
+    aircraft_list.sort(key=lambda x: x[3])
     
     total_produced = 0
-    total_attempted = sum(item[2] for item in vehicle_list)
+    total_attempted = sum(item[2] for item in aircraft_list)
     successful_types = []
     failed_types = []
     
-    for vehicle_name, vehicle_code, quantity, priority in vehicle_list:
-        count = produce_vehicle(api, vehicle_name, vehicle_code, quantity)
+    for aircraft_name, aircraft_code, quantity, priority in aircraft_list:
+        count = produce_aircraft(api, aircraft_name, aircraft_code, quantity)
         total_produced += count
         
         if count > 0:
-            successful_types.append(f"{vehicle_name} x{count}")
+            successful_types.append(f"{aircraft_name} x{count}")
         else:
-            failed_types.append(vehicle_name)
+            failed_types.append(aircraft_name)
         
-        # 每个载具之间稍微等待
+        # 每个飞机之间稍微等待
         time.sleep(2)
     
     # 最终报告
@@ -348,21 +371,21 @@ def main():
     info = api.player_base_info_query()
     all_units = api.query_actor(TargetsQueryParam(faction='自己'))
     
-    # 统计载具数量
-    vehicle_codes = ['mcv', 'harv', 'apc', 'ftrk', 'jeep', 'truk', 'mvly']
-    vehicle_units = [u for u in all_units if u.type in vehicle_codes or 
-                     u.type in ['基地车', '采矿车', '装甲运输车', '防空车', '吉普车', '运输卡车', '地雷部署车']]
+    # 统计飞机数量
+    aircraft_codes = ['yak', 'mig', 'tran', 'hind', 'mh60', 'heli']
+    aircraft_units = [u for u in all_units if u.type in aircraft_codes or 
+                      u.type in ['雅克战机', '米格战机', '运输直升机', '雌鹿直升机', '黑鹰直升机', '长弓武装直升机']]
     
     print(f"\n资源状态:")
     print(f"  剩余资金: ${info.Cash}")
     print(f"  电力: {info.Power} / {info.PowerProvided}")
     print(f"  总单位数: {len(all_units)}")
-    print(f"  载具数量: {len(vehicle_units)}")
+    print(f"  飞机数量: {len(aircraft_units)}")
     
     print(f"\n生产结果:")
     print(f"  成功生产: {total_produced} / {total_attempted} 单位")
     print(f"  完成度: {total_produced * 100 // total_attempted if total_attempted > 0 else 0}%")
-    print(f"  成功类型: {len(successful_types)} / 7 种")
+    print(f"  成功类型: {len(successful_types)} / 6 种")
     
     if successful_types:
         print(f"\n✓ 成功生产:")
@@ -374,7 +397,8 @@ def main():
         for item in failed_types:
             print(f"    • {item}")
         print(f"\n失败原因可能:")
-        print(f"  - 缺少战车工厂")
+        if not has_airfield:
+            print(f"  - 缺少机场")
         print(f"  - 电力不足")
         print(f"  - 资金不足")
         print(f"  - 科技等级限制")
@@ -382,9 +406,9 @@ def main():
     # 成功判断
     print("\n" + "=" * 70)
     if total_produced >= total_attempted:
-        print("✓✓✓ 任务完成！所有载具已生产 ✓✓✓")
-    elif len(successful_types) >= 5:
-        print("✓ 任务基本完成！大部分载具已生产")
+        print("✓✓✓ 任务完成！所有飞机已生产 ✓✓✓")
+    elif len(successful_types) >= 4:
+        print("✓ 任务基本完成！大部分飞机已生产")
     elif len(successful_types) >= 2:
         print("⚠ 部分完成 - 可能受科技等级限制")
         print("\n提示: 请确保游戏设置中 Tech Level 为 Unrestricted")
@@ -392,13 +416,18 @@ def main():
         print("✗ 任务未达标")
     print("=" * 70)
     
-    # 显示载具详细列表
-    if vehicle_units:
-        print(f"\n当前所有载具列表:")
-        for i, vehicle in enumerate(vehicle_units, 1):
-            print(f"  {i}. {vehicle.type} (ID:{vehicle.actor_id}) - "
-                  f"位置:({vehicle.position.x},{vehicle.position.y}) - "
-                  f"血量:{vehicle.hppercent}%")
+    # 显示飞机详细列表
+    if aircraft_units:
+        print(f"\n当前所有飞机列表:")
+        for i, aircraft in enumerate(aircraft_units, 1):
+            print(f"  {i}. {aircraft.type} (ID:{aircraft.actor_id}) - "
+                  f"位置:({aircraft.position.x},{aircraft.position.y}) - "
+                  f"血量:{aircraft.hppercent}%")
+    
+    print("\n提示: 飞机可以使用以下命令:")
+    print("  • api.move_actor() - 移动飞机")
+    print("  • api.attack() - 攻击目标")
+    print("  • 战机会自动返回机场补给")
     
     print("\n程序执行完成！")
     input("\n按回车退出...")
