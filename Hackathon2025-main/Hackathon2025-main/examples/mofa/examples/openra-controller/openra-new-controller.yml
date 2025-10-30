@@ -1,0 +1,40 @@
+nodes:
+  - id: terminal-input
+    build: pip install -e ../../node-hub/terminal-input
+    path: dynamic
+    outputs:
+      - data
+    inputs:
+      battlefield_reader_result: openra-battlefield-reader-node/battlefield_reader_result
+      battlefield_analyze_result: openra-battlefield-analyze-node/battlefield_analyze_result
+      battlefield_execute_result: openra-execute-node/battlefield_execute_result
+
+  - id: openra-battlefield-reader-node
+    build: pip install -e ../../agent-hub/openra-battlefield-reader
+    path: openra-battlefield-reader
+    outputs:
+      - battlefield_reader_result
+    inputs:
+      battlefield-reader-signal: terminal-input/data
+    env:
+      OPENRA_PATH: /Users/chenzi/chenzi/project/github/OpenRA/Copilot/openra_ai
+
+  - id: openra-battlefield-analyze-node
+    build: pip install -e ../../agent-hub/openra-battlefield-analyze
+    path: openra-battlefield-analyze
+    outputs:
+      - battlefield_analyze_result
+    inputs:
+      battlefield-analyze-signal: openra-battlefield-reader-node/battlefield_reader_result
+    env:
+      OPENRA_PATH: /Users/chenzi/chenzi/project/github/OpenRA/Copilot/openra_ai
+  - id: openra-execute-node
+    build: pip install -e ../../agent-hub/openra-execute
+    path: openra-execute
+    outputs:
+      - battlefield_execute_result
+    inputs:
+      battlefield-execute-signal: openra-battlefield-analyze-node/battlefield_analyze_result
+    env:
+      OPENRA_PATH: /Users/chenzi/chenzi/project/github/OpenRA/Copilot/openra_ai
+      IS_DATAFLOW_END: true

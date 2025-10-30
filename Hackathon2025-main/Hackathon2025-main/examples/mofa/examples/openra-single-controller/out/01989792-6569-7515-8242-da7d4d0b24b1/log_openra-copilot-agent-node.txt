@@ -1,0 +1,47 @@
+🎮 收到用户指令: 展开基地车
+🤖 AI 调用工具: query_actor 参数: {'type': ['基地车']}
+📤 AI 处理结果: 为了展开基地车，我需要知道你当前使用的阵营。请提供该信息。
+🎮 收到用户指令: 我不知道，你自己调用工具获取
+🤖 AI 调用工具: get_game_state 参数: {}
+📤 AI 处理结果: 看起来我无法直接获取游戏的状态信息。请告诉我你目前的大致情况或想要执行的操作，我会协助你完成。
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None

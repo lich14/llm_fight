@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="mermaid">
+        flowchart TB
+  openra-battlefield-analyze-node["**openra-battlefield-analyze-node**"]
+  openra-battlefield-reader-node["**openra-battlefield-reader-node**"]
+  openra-execute-node["**openra-execute-node**"]
+  terminal-input["**terminal-input**"]
+  openra-battlefield-reader-node -- battlefield_reader_result as battlefield-analyze-signal --> openra-battlefield-analyze-node
+  terminal-input -- data as battlefield-reader-signal --> openra-battlefield-reader-node
+  openra-battlefield-analyze-node -- battlefield_analyze_result as battlefield-execute-signal --> openra-execute-node
+  openra-battlefield-analyze-node -- battlefield_analyze_result --> terminal-input
+  openra-execute-node -- battlefield_execute_result --> terminal-input
+  openra-battlefield-reader-node -- battlefield_reader_result --> terminal-input
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+/Users/chenzi/env/miniconda3/envs/py310/lib/python3.10/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+/Users/chenzi/env/miniconda3/envs/py310/lib/python3.10/site-packages/paramiko/pkey.py:100: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  "cipher": algorithms.TripleDES,
+/Users/chenzi/env/miniconda3/envs/py310/lib/python3.10/site-packages/paramiko/transport.py:258: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  "class": algorithms.TripleDES,
+🎮 收到用户指令: 展开基地车
+🤖 AI 调用工具: get_game_state 参数: {}
+📤 AI 处理结果: 我将部署基地车。请稍等。  
+调用 deploy_units()。
+🎮 收到用户指令: 部署基地车
+🤖 AI 调用工具: deploy_units 参数: {}
+📤 AI 处理结果: 基地车已成功部署。请告诉我接下来需要执行的操作！
+🎮 收到用户指令: 建造电厂
+🤖 AI 调用工具: get_game_state 参数: {}
+📤 AI 处理结果: 根据当前游戏状态，我可以看到您有足够的资源，但没有可用的单位来建造电厂。如果您有单位可用，请告诉我，否则您可能需要先生产或移动单位。请告知我接下来的操作。
+🎮 收到用户指令: 在基地周围建造电厂
+🤖 AI 调用工具: get_game_state 参数: {}
+📤 AI 处理结果: 当前游戏状态显示你有15000的资源，且有一个建造厂可用于建造单位。不过，游戏中并没有电厂的信息。请确认你要建造的单位类型，通常电厂的建造需要从建造厂中选择。 
+
+你想要建造电厂吗？如果是，请让我知道！
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+[2m2025-08-11T07:42:56.605250Z[0m [33m WARN[0m [2mdora_node_api::event_stream::thread[0m[2m:[0m dropping event because event `tx` was already closed: `Stop`
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None

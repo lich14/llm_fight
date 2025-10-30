@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "openra-mcp-agent"
+version = "0.1.0"
+authors = [
+    "OpenRA Hackathon Team",
+]
+description = "OpenRA Copilot Agent for MoFA - Single Node Version"
+license = "MIT License"
+homepage = "https://github.com/moxin-org/mofa"
+documentation = "https://github.com/moxin-org/mofa/blob/main/README.md"
+readme = "README.md"
+packages = [{ include = "openra_mcp_agent" }]
+
+[tool.poetry.dependencies]
+pyarrow = ">= 5.0.0"
+openai = ">= 1.50.0"
+python-dotenv = ">= 1.0.0"
+
+[tool.poetry.scripts]
+openra-mcp-agent = "openra_mcp_agent.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"

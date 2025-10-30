@@ -1,0 +1,2 @@
+🎮 收到命令: None
+📤 输出结果: ❌ 错误: 命令执行失败: 'NoneType' object has no attribute 'strip'

@@ -1,0 +1,23 @@
+nodes:
+  # 终端输入节点 - 接收用户命令并显示结果
+  - id: terminal-input
+    build: pip install -e ../../node-hub/terminal-input
+    path: dynamic
+    outputs:
+      - data
+    inputs:
+      copilot_result: openra-copilot-agent-node/copilot_result
+
+  # OpenRA Copilot Agent - 单节点处理所有游戏控制逻辑
+  - id: openra-copilot-agent-node
+    build: pip install -e ../../agent-hub/openra-copilot-agent
+    path: openra-copilot-agent
+    outputs:
+      - copilot_result
+    inputs:
+      user_command: terminal-input/data
+    env:
+      OPENRA_PATH: /Users/chenzi/project/github/OpenRA/Copilot/openra_ai
+      IS_DATAFLOW_END: true
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      

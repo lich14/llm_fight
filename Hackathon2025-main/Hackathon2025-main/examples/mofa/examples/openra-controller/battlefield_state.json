@@ -1,0 +1,67 @@
+{
+  "economy": {
+    "cash": 28450,
+    "power": 190,
+    "power_provided": 300,
+    "power_drained": 110,
+    "raw_data": {
+      "Cash": 13200,
+      "Resources": 15250,
+      "Power": 190,
+      "PowerProvided": 300,
+      "PowerDrained": 110
+    }
+  },
+  "production": {
+    "infantry": {
+      "queue_type": "Infantry",
+      "queue_items": [],
+      "has_ready_item": false
+    },
+    "vehicle": {
+      "queue_type": "Vehicle",
+      "queue_items": [],
+      "has_ready_item": false
+    },
+    "building": {
+      "queue_type": "Building",
+      "queue_items": [],
+      "has_ready_item": false
+    },
+    "aircraft": {
+      "queue_type": "Aircraft",
+      "queue_items": [],
+      "has_ready_item": false
+    },
+    "defense": {
+      "queue_type": "Defense",
+      "queue_items": [],
+      "has_ready_item": false
+    },
+    "naval": {
+      "items": 0,
+      "has_ready": false,
+      "queue_items": []
+    }
+  },
+  "map_info": {
+    "width": 52,
+    "height": 52
+  },
+  "screen_info": {
+    "screenMin": {
+      "x": 27,
+      "y": 10
+    },
+    "screenMax": {
+      "x": 49,
+      "y": 42
+    },
+    "isMouseOnScreen": false,
+    "mousePosition": {
+      "x": 70,
+      "y": 34
+    }
+  },
+  "timestamp": 1755764255.335217
+}

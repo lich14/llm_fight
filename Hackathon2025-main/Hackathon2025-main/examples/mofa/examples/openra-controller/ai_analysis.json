@@ -1,0 +1,50 @@
+{
+  "situation_assessment": "当前资源充足，现金28450，电力190，步兵单位尚未生产。用户希望派遣步兵进行探索，适合采取标准策略。",
+  "user_intent_interpretation": "用户希望通过派遣步兵进行侦查，获取敌方情报或占领战略位置。",
+  "recommended_strategy": "优先生产步兵，然后派遣其进行探索任务。",
+  "priority_actions": [
+    "生产步兵",
+    "派遣步兵进行探索"
+  ],
+  "action_plan": [
+    {
+      "id": "1",
+      "description": "生产步兵",
+      "tool": "produce_unit",
+      "args": {
+        "unit_type": "步兵"
+      },
+      "preconditions": {
+        "cash": "cash >= 100",
+        "infantry_queue": "production_data.infantry.queue_items.length < 12"
+      },
+      "postconditions": {
+        "infantry_queue": "production_data.infantry.queue_items.length == 1"
+      },
+      "success_check": "production_data.infantry.queue_items.length == 1",
+      "on_failure": "记录生产失败，检查资源或队列",
+      "estimated_time_s": 30
+    },
+    {
+      "id": "2",
+      "description": "派遣步兵进行探索",
+      "tool": "send_unit",
+      "args": {
+        "unit_type": "步兵",
+        "mission": "探索"
+      },
+      "preconditions": {
+        "infantry_ready": "production_data.infantry.queue_items.length > 0"
+      },
+      "postconditions": {
+        "unit_on_mission": "unit_type == '步兵' and mission == '探索'"
+      },
+      "success_check": "unit_on_mission == true",
+      "on_failure": "记录派遣失败，检查步兵状态",
+      "estimated_time_s": 20
+    }
+  ],
+  "reasoning": "首先，生产步兵是执行探索任务的前提。根据当前资源情况，生产步兵不会造成资源不足。生产完成后，立即派遣步兵进行探索，以获取敌方情报或占领战略位置。此计划确保了高效的资源利用和及时的战术执行。",
+  "production_recommendations": [],
+  "assumptions": "假设生产步兵的时间为30秒，派遣步兵的时间为20秒，且没有其他干扰因素。"
+}

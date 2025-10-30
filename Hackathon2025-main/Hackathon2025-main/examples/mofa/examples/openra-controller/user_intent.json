@@ -1,0 +1,8 @@
+{
+  "raw_input": "派遣步兵去探索 ",
+  "intent_type": "infantry_focus",
+  "priority_units": [
+    "infantry"
+  ],
+  "strategy": "standard"
+}

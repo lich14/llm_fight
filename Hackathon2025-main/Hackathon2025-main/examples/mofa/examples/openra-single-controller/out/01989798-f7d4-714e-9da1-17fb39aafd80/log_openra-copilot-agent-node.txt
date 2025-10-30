@@ -1,0 +1,12 @@
+🎮 收到用户指令: 基地车
+🤖 AI 调用工具: get_game_state 参数: {}
+📤 AI 处理结果: 请求游戏状态时出现错误。我会重试一次，确保获取最新的游戏状态和单位信息。
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None
+📤 AI 处理结果: ❌ AI 处理失败: Error code: 400 - {'error': {'message': "Invalid value for 'content': expected a string, got null.", 'type': 'invalid_request_error', 'param': 'messages.[1].content', 'code': None}}
+🎮 收到用户指令: None

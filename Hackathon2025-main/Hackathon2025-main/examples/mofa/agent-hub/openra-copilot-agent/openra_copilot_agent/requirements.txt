@@ -1,0 +1,2 @@
+# OpenRA Copilot Agent requirements
+# MoFA framework is installed via pip install -e .

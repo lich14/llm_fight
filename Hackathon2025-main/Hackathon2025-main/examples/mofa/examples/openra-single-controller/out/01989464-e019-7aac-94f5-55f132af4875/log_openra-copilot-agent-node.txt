@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/opt/homebrew/bin/openra-copilot-agent", line 3, in <module>
+    from openra_copilot_agent.main import main
+  File "/Users/liyao/Code/mofa/mofa_old/mofa/python/agent-hub/openra-copilot-agent/openra_copilot_agent/main.py", line 15, in <module>
+    from openra_tools import OpenRATools
+ModuleNotFoundError: No module named 'openra_tools'
