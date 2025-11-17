@@ -1,0 +1,439 @@
+{
+  "buildings": {
+    "电厂": {
+      "code": "powr",
+      "name_cn": "电厂",
+      "name_en": "Power Plant",
+      "cost": 150,
+      "power": 100,
+      "prerequisites": [
+        "建造厂"
+      ],
+      "category": "power",
+      "description": "提供电力，每个电厂提供100电力"
+    },
+    "核电站": {
+      "code": "apwr",
+      "name_cn": "核电站",
+      "name_en": "Advanced Power Plant",
+      "cost": 250,
+      "power": 200,
+      "prerequisites": [
+        "建造厂",
+        "雷达"
+      ],
+      "category": "power",
+      "description": "高级电厂，提供200电力，效率更高"
+    },
+    "矿场": {
+      "code": "proc",
+      "name_cn": "矿场",
+      "name_en": "Ore Refinery",
+      "cost": 700,
+      "power": -30,
+      "prerequisites": [
+        "建造厂",
+        "电厂"
+      ],
+      "category": "economy",
+      "description": "精炼矿石，自动赠送一辆采矿车"
+    },
+    "战车工厂": {
+      "code": "weap",
+      "name_cn": "战车工厂",
+      "name_en": "War Factory",
+      "cost": 1000,
+      "power": -30,
+      "prerequisites": [
+        "建造厂",
+        "矿场"
+      ],
+      "category": "production",
+      "description": "生产坦克和车辆"
+    },
+    "兵营": {
+      "code": "barr",
+      "name_cn": "兵营",
+      "name_en": "Barracks",
+      "cost": 250,
+      "power": -20,
+      "prerequisites": [
+        "建造厂",
+        "电厂"
+      ],
+      "category": "production",
+      "description": "训练步兵单位"
+    },
+    "雷达": {
+      "code": "dome",
+      "name_cn": "雷达",
+      "name_en": "Radar Dome",
+      "cost": 250,
+      "power": -40,
+      "prerequisites": [
+        "建造厂",
+        "矿场"
+      ],
+      "category": "tech",
+      "description": "提供雷达视野，显示小地图"
+    },
+    "维修厂": {
+      "code": "fix",
+      "name_cn": "维修厂",
+      "name_en": "Service Depot",
+      "cost": 600,
+      "power": -30,
+      "prerequisites": [
+        "建造厂",
+        "战车工厂"
+      ],
+      "category": "support",
+      "description": "修理受损车辆，解锁高级单位"
+    },
+    "科技中心": {
+      "code": "stek",
+      "name_cn": "科技中心",
+      "name_en": "Tech Center",
+      "cost": 750,
+      "power": -100,
+      "prerequisites": [
+        "建造厂",
+        "雷达",
+        "战车工厂"
+      ],
+      "category": "tech",
+      "description": "解锁最高级单位，如猛犸坦克和米格战斗机"
+    },
+    "机场": {
+      "code": "afld",
+      "name_cn": "机场",
+      "name_en": "Airfield",
+      "cost": 200,
+      "power": -20,
+      "prerequisites": [
+        "建造厂",
+        "雷达"
+      ],
+      "category": "production",
+      "description": "生产飞机单位"
+    }
+  },
+  "defense": {
+    "火焰塔": {
+      "code": "ftur",
+      "name_cn": "火焰塔",
+      "name_en": "Flame Tower",
+      "cost": 300,
+      "power": -20,
+      "prerequisites": [
+        "建造厂",
+        "电厂"
+      ],
+      "category": "defense",
+      "description": "防御建筑，对步兵和轻装甲单位有效"
+    },
+    "特斯拉塔": {
+      "code": "tsla",
+      "name_cn": "特斯拉塔",
+      "name_en": "Tesla Coil",
+      "cost": 600,
+      "power": -100,
+      "prerequisites": [
+        "建造厂",
+        "电厂"
+      ],
+      "category": "defense",
+      "description": "强大的防御塔，高伤害电击"
+    },
+    "防空导弹": {
+      "code": "sam",
+      "name_cn": "防空导弹",
+      "name_en": "SAM Site",
+      "cost": 350,
+      "power": -40,
+      "prerequisites": [
+        "建造厂",
+        "雷达"
+      ],
+      "category": "defense",
+      "description": "防空建筑，攻击飞机"
+    }
+  },
+  "vehicles": {
+    "采矿车": {
+      "code": "harv",
+      "name_cn": "采矿车",
+      "name_en": "Ore Truck",
+      "cost": 1400,
+      "prerequisites": [
+        "矿场"
+      ],
+      "category": "economy",
+      "hp": 600,
+      "armor": "heavy",
+      "speed": "slow",
+      "description": "采集矿石，运回矿场"
+    },
+    "防空车": {
+      "code": "ftrk",
+      "name_cn": "防空车",
+      "name_en": "Mobile AA",
+      "cost": 300,
+      "prerequisites": [
+        "战车工厂"
+      ],
+      "category": "anti_air",
+      "hp": 150,
+      "armor": "light",
+      "speed": "fast",
+      "weapon": "aa_gun",
+      "attack": 40,
+      "range": 10,
+      "description": "防空车，对空中单位有效"
+    },
+    "重型坦克": {
+      "code": "3tnk",
+      "name_cn": "重型坦克",
+      "name_en": "Heavy Tank",
+      "cost": 575,
+      "prerequisites": [
+        "战车工厂"
+      ],
+      "category": "combat",
+      "hp": 400,
+      "armor": "heavy",
+      "speed": "medium",
+      "weapon": "cannon",
+      "attack": 50,
+      "range": 4,
+      "description": "主力坦克，攻防平衡"
+    },
+    "猛犸坦克": {
+      "code": "4tnk",
+      "name_cn": "猛犸坦克",
+      "name_en": "Mammoth Tank",
+      "cost": 500,
+      "prerequisites": [
+        "战车工厂",
+        "维修厂",
+        "科技中心"
+      ],
+      "category": "combat",
+      "hp": 600,
+      "armor": "heavy",
+      "speed": "slow",
+      "weapon": "dual_cannon",
+      "attack": 75,
+      "range": 5,
+      "description": "最强坦克，双炮管高伤害"
+    },
+    "V2火箭发射车": {
+      "code": "v2rl",
+      "name_cn": "V2火箭发射车",
+      "name_en": "V2 Rocket",
+      "cost": 450,
+      "prerequisites": [
+        "战车工厂",
+        "雷达"
+      ],
+      "category": "artillery",
+      "hp": 150,
+      "armor": "light",
+      "speed": "medium",
+      "weapon": "rocket",
+      "attack": 60,
+      "range": 12,
+      "description": "远程火箭车，攻击建筑"
+    }
+  },
+  "infantry": {
+    "步兵": {
+      "code": "e1",
+      "name_cn": "步兵",
+      "name_en": "Rifle Infantry",
+      "cost": 50,
+      "prerequisites": [
+        "兵营"
+      ],
+      "category": "basic",
+      "hp": 50,
+      "armor": "none",
+      "speed": "medium",
+      "weapon": "rifle",
+      "attack": 15,
+      "range": 4,
+      "description": "基础步兵，便宜但脆弱"
+    },
+    "火箭兵": {
+      "code": "e3",
+      "name_cn": "火箭兵",
+      "name_en": "Rocket Soldier",
+      "cost": 5,
+      "prerequisites": [
+        "兵营"
+      ],
+      "category": "anti_armor",
+      "hp": 45,
+      "armor": "none",
+      "speed": "medium",
+      "weapon": "rocket",
+      "attack": 50,
+      "range": 5,
+      "description": "反坦克步兵，对载具有效"
+    }
+  },
+  "aircraft": {
+    "雅克战机": {
+      "code": "yak",
+      "name_cn": "雅克战机",
+      "name_en": "Yak",
+      "cost": 675,
+      "prerequisites": [
+        "机场"
+      ],
+      "category": "combat",
+      "hp": 60,
+      "armor": "light",
+      "speed": "very_fast",
+      "weapon": "cannon",
+      "attack": 50,
+      "range": 5,
+      "description": "战斗机，快速攻击"
+    },
+    "米格战斗机": {
+      "code": "mig",
+      "name_cn": "米格战斗机",
+      "name_en": "MIG",
+      "cost": 500,
+      "prerequisites": [
+        "机场",
+        "科技中心"
+      ],
+      "category": "combat",
+      "hp": 60,
+      "armor": "light",
+      "speed": "very_fast",
+      "weapon": "advanced_missiles",
+      "attack": 80,
+      "range": 8,
+      "description": "最强战斗机，高速高伤害"
+    }
+  },
+  "game_meta": {
+    "tech_tree": {
+      "tier_1": {
+        "description": "基础建筑阶段",
+        "buildings": [
+          "建造厂",
+          "电厂",
+          "矿场",
+          "兵营"
+        ],
+        "units": [
+          "步兵",
+          "火箭兵",
+          "采矿车"
+        ]
+      },
+      "tier_2": {
+        "description": "战车生产阶段",
+        "buildings": [
+          "战车工厂",
+          "雷达",
+          "机场"
+        ],
+        "prerequisites": [
+          "电厂"
+        ],
+        "units": [
+          "吉普车",
+          "中型坦克",
+          "重型坦克",
+          "防空车",
+          "直升机",
+          "雅克战机"
+        ]
+      },
+      "tier_3": {
+        "description": "高级科技阶段",
+        "buildings": [
+          "维修厂",
+          "核电站",
+          "科技中心"
+        ],
+        "prerequisites": [
+          "雷达",
+          "战车工厂"
+        ],
+        "units": [
+          "猛犸坦克",
+          "米格战斗机",
+          "V2火箭发射车"
+        ]
+      }
+    },
+    "combat_effectiveness": {
+      "tanks": {
+        "猛犸坦克": {
+          "attack": 75,
+          "hp": 600,
+          "cost_effectiveness": 9
+        },
+        "超重型坦克": {
+          "attack": 65,
+          "hp": 500,
+          "cost_effectiveness": 8
+        },
+        "重型坦克": {
+          "attack": 50,
+          "hp": 400,
+          "cost_effectiveness": 8
+        }
+      },
+      "aircraft": {
+        "米格战斗机": {
+          "attack": 80,
+          "hp": 60,
+          "cost_effectiveness": 8
+        },
+        "雅克战机": {
+          "attack": 50,
+          "hp": 60,
+          "cost_effectiveness": 6
+        }
+      },
+      "infantry": {
+        "火箭兵": {
+          "attack": 50,
+          "hp": 45,
+          "cost_effectiveness": 7
+        },
+        "步兵": {
+          "attack": 15,
+          "hp": 50,
+          "cost_effectiveness": 5
+        }
+      }
+    },
+    "build_priority": {
+      "early_game": [
+        "电厂",
+        "矿场",
+        "战车工厂",
+        "雷达"
+      ],
+      "mid_game": [
+        "战车工厂",
+        "维修厂",
+        "核电站",
+        "科技中心",
+        "机场"
+      ],
+      "late_game": [
+        "猛犸坦克",
+        "米格战斗机",
+        "防御建筑"
+      ]
+    }
+  }
+}
